@@ -2,16 +2,14 @@ import { Body, Controller, Get, HttpException, Post, UseGuards } from '@nestjs/c
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
 
-  constructor(
-    private readonly userService: UserService
-  ) {
-  }
+  constructor(private readonly userService: UserService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard('google'))
   @Get()
   public async getAll(): Promise<User[]> {
     return this.userService.getAllUsers();

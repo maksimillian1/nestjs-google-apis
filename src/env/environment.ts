@@ -3,6 +3,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 interface Config {
   db: TypeOrmModuleOptions;
   secret: string;
+  google: any
 }
 
 export const env: Config = {
@@ -16,5 +17,11 @@ export const env: Config = {
     type: 'mysql',
     entities: ["dist/**/*.entity{.ts,.js}"]
   },
-  secret: 'lolkek'
+  secret: 'lolkek',
+  google: {
+    clientID: '679927207784-4863rhnsmgghtm5anj40gj2qfl1onuag.apps.googleusercontent.com',
+    clientSecret: '6buP9AzZkbuJTs2W8QeMzYas',
+    callbackURL: 'http://localhost:3000/google/redirect',
+    scope: ['email', 'profile'],
+  }
 };

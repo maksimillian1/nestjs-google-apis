@@ -9,6 +9,9 @@ import { UserService } from '../user/user.service';
 import { UserModule } from '../user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/user.entity';
+import { GoogleController } from './google/google.controller';
+import { GoogleService } from './google/google.service';
+import { GoogleStrategy } from './google.stategy';
 
 @Module({
   imports: [
@@ -16,9 +19,20 @@ import { User } from '../user/user.entity';
       secret: env.secret,
       signOptions: { expiresIn: '60h' },
     }),
-    TypeOrmModule.forFeature([User])
+    TypeOrmModule.forFeature([User]),
   ],
-  providers: [AuthService, JwtStrategy, LocalStrategy, UserService],
-  controllers: [AuthController]
+  providers: [
+    AuthService,
+    JwtStrategy,
+    LocalStrategy,
+    UserService,
+    GoogleStrategy,
+    GoogleService
+  ],
+  controllers: [
+    AuthController,
+    GoogleController
+  ],
 })
-export class AuthModule {}
+export class AuthModule {
+}
